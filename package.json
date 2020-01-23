@@ -4,7 +4,7 @@
 	"main": "index.js",
 	"license": "MIT",
 	"description": "O DevRadar é um projeto que visa conectar desenvolvedores próximos a você que trabalham com as mesmas tecnologias.",
-	"repository": "www.link.com",
+	"repository": "https://github.com/oDallas/DevRadar",
 	"author": "oDallas",
 	"devDependencies": {
 		"babel-eslint": "^10.0.3",
