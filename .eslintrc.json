@@ -8,9 +8,10 @@
 		"node": true
 	},
 	"rules": {
+		"react/prop-types": "off",
 		"camelcase": "off",
-
-		"jsx-a11y/href-no-hash": ["off"],
+		"no-underscore-dangle": "off",
+		"jsx-a11y/href-no-hash": "off",
 		"react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
 		"max-len": [
 			"warn",

@@ -1,6 +1,7 @@
 import React from 'react';
 import { WebView } from 'react-native-webview';
-import { StyleSheet } from 'react-native';
+
+import styles from './styles';
 
 function Profile({ navigation }) {
 	const login = navigation.getParam('login');
@@ -12,11 +13,5 @@ function Profile({ navigation }) {
 		/>
 	);
 }
-
-const styles = StyleSheet.create({
-	WebView: {
-		flex: 1
-	}
-});
 
 export default Profile;
