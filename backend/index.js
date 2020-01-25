@@ -20,6 +20,4 @@ app.use(cors());
 app.use(express.json());
 app.use(routes);
 
-// kill `lsof -i TCP:3333 | grep LISTEN | awk '{ print $2 }'`
-
 server.listen(3333);
