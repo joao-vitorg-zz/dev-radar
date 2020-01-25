@@ -60,8 +60,8 @@ function DevForm({ onSubmit }) {
 			{InputBlock('techs', techs, setTechs, 'text', 'Tecnologías')}
 
 			<div className="input-group">
-				{InputBlock('latitude', latitude, 'number', setLatitude)}
-				{InputBlock('longitude', longitude, 'number', setLongitude)}
+				{InputBlock('latitude', latitude, setLatitude, 'number')}
+				{InputBlock('longitude', longitude, setLongitude, 'number')}
 			</div>
 
 			<button type="submit">Salvar</button>
