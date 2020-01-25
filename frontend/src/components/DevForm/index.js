@@ -1,97 +1,72 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './styles.scss';
 
-class DevForm extends React.Component {
-	constructor(props) {
-		super(props);
-		this.handleSubmit = this.handleSubmit.bind(this);
-		this.state = {
-			login: '',
-			techs: '',
-			latitude: 0,
-			longitude: 0
-		};
-	}
+function InputBlock(id, value, setValue, type, msg = id) {
+	return (
+		<div className="input-block">
+			<label htmlFor={id}>{msg}</label>
+			<input
+				type={type}
+				name={id}
+				id={id}
+				required
+				value={value}
+				onChange={e => setValue(e.target.value)}
+			/>
+		</div>
+	);
+}
 
-	componentDidMount() {
-		navigator.geolocation.getCurrentPosition(
-			position => {
-				const { latitude, longitude } = position.coords;
+function GetCurrentPossition() {
+	const [latitude, setLatitude] = useState(0);
+	const [longitude, setLongitude] = useState(0);
 
-				this.setState({ latitude, longitude });
-			},
-			err => alert(err.message),
-			{ enableHighAccuracy: true, timeout: 20000 }
-		);
-	}
+	navigator.geolocation.getCurrentPosition(
+		position => {
+			setLatitude(position.coords.latitude);
+			setLongitude(position.coords.longitude);
+		},
+		err => console.error(err.message),
+		{ enableHighAccuracy: true, timeout: 20000 }
+	);
 
-	async handleSubmit(e) {
+	return [latitude, longitude, setLatitude, setLongitude];
+}
+
+function DevForm({ onSubmit }) {
+	const [login, setLogin] = useState('');
+	const [techs, setTechs] = useState('');
+
+	const [
+		latitude,
+		longitude,
+		setLatitude,
+		setLongitude
+	] = GetCurrentPossition();
+
+	async function handleSubmit(e) {
 		e.preventDefault();
 
-		const { onSubmit } = this.props;
-		onSubmit(this.state);
+		await onSubmit({ login, techs, latitude, longitude });
 
-		this.setState({ login: '', techs: '' });
+		setLogin('');
+		setTechs('');
 	}
 
-	render() {
-		const { login, techs, latitude, longitude } = this.state;
+	return (
+		<form onSubmit={handleSubmit}>
+			{InputBlock('login', login, setLogin, 'text', 'Usuário do Github')}
+			{InputBlock('techs', techs, setTechs, 'text', 'Tecnologías')}
 
-		return (
-			<form onSubmit={this.handleSubmit}>
-				<div className="input-block">
-					<label htmlFor="login">Usuário do Github</label>
-					<input
-						name="login"
-						id="login"
-						required
-						value={login}
-						onChange={e => this.setState({ login: e.target.value })}
-					/>
-				</div>
+			<div className="input-group">
+				{InputBlock('latitude', latitude, 'number', setLatitude)}
+				{InputBlock('longitude', longitude, 'number', setLongitude)}
+			</div>
 
-				<div className="input-block">
-					<label htmlFor="techs">Tecnologias</label>
-					<input
-						name="techs"
-						id="techs"
-						required
-						value={techs}
-						onChange={e => this.setState({ techs: e.target.value })}
-					/>
-				</div>
-
-				<div className="input-group">
-					<div className="input-block">
-						<label htmlFor="latitude">Latitude</label>
-						<input
-							type="number"
-							name="latitude"
-							id="latitude"
-							required
-							value={latitude}
-							onChange={e => this.setState({ latitude: e.target.value })}
-						/>
-					</div>
-
-					<div className="input-block">
-						<label htmlFor="longitude">Longitude</label>
-						<input
-							type="number"
-							name="longitude"
-							id="longitude"
-							required
-							value={longitude}
-							onChange={e => this.setState({ longitude: e.target.value })}
-						/>
-					</div>
-				</div>
-
-				<button type="submit">Salvar</button>
-			</form>
-		);
-	}
+			<button type="submit">Salvar</button>
+		</form>
+	);
 }
 
 export default DevForm;

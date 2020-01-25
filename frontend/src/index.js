@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import api from './src/services/api';
+import api from './services/api';
 
-import './src/styles/Sidebar.scss';
-import './src/styles/global.scss';
-import './src/styles/Main.scss';
-import './src/styles/App.scss';
+import './styles/Sidebar.scss';
+import './styles/global.scss';
+import './styles/Main.scss';
+import './styles/App.scss';
 
-import DevItem from './src/components/DevItem';
-import DevForm from './src/components/DevForm';
+import DevItem from './components/DevItem';
+import DevForm from './components/DevForm';
 
 class App extends React.Component {
 	constructor(props) {
