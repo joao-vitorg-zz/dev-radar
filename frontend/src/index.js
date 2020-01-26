@@ -41,7 +41,7 @@ class App extends React.Component {
 		return (
 			<div id="app">
 				<aside>
-					<strong>Cadastrar</strong>
+					<img src="./logo.svg" alt="logo" />
 					<DevForm onSubmit={this.handledAddDev} />
 				</aside>
 
