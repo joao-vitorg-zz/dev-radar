@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 import api from './services/api';
@@ -11,50 +11,41 @@ import './styles/App.scss';
 import DevItem from './components/DevItem';
 import DevForm from './components/DevForm';
 
-class App extends React.Component {
-	constructor(props) {
-		super(props);
-		this.handledAddDev = this.handledAddDev.bind(this);
-		this.state = {
-			devs: []
-		};
-	}
+function App() {
+	const [devs, setDevs] = useState([]);
 
-	async componentDidMount() {
-		const res = await api.get('/devs');
+	useEffect(() => {
+		async function loadDevs() {
+			const res = await api.get('/devs');
+			setDevs(res.data);
+		}
 
-		this.setState({ devs: res.data });
-	}
+		loadDevs();
+	}, []);
 
-	async handledAddDev(data) {
-		const { devs } = this.state;
-
+	async function handledAddDev(data) {
 		if (!devs.find(dev => dev.login === data.login)) {
 			const res = await api.post('/devs', data);
-			this.setState({ devs: [...devs, res.data] });
+			setDevs([...devs, res.data]);
 		}
 	}
 
-	render() {
-		const { devs } = this.state;
+	return (
+		<div id="app">
+			<aside>
+				<img src="./logo.svg" alt="logo" />
+				<DevForm onSubmit={handledAddDev} />
+			</aside>
 
-		return (
-			<div id="app">
-				<aside>
-					<img src="./logo.svg" alt="logo" />
-					<DevForm onSubmit={this.handledAddDev} />
-				</aside>
-
-				<main>
-					<ul>
-						{devs.map(dev => (
-							<DevItem key={dev._id} dev={dev} />
-						))}
-					</ul>
-				</main>
-			</div>
-		);
-	}
+			<main>
+				<ul>
+					{devs.map(dev => (
+						<DevItem key={dev._id} dev={dev} />
+					))}
+				</ul>
+			</main>
+		</div>
+	);
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
