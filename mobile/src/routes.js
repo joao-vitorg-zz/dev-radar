@@ -4,9 +4,27 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Main from './pages/Main/Main';
 import Profile from './pages/Profile/Profile';
 
+const config = {
+	animation: 'spring',
+	config: {
+		stiffness: 1000,
+		damping: 500,
+		mass: 3,
+		overshootClamping: true,
+		restDisplacementThreshold: 0.01,
+		restSpeedThreshold: 0.01
+	}
+};
+
 const Routes = createAppContainer(
 	createStackNavigator(
 		{
+			Login: {
+				screen: Login,
+				navigationOptions: {
+					title: 'Login'
+				}
+			},
 			Main: {
 				screen: Main,
 				navigationOptions: {
@@ -15,9 +33,9 @@ const Routes = createAppContainer(
 			},
 			Profile: {
 				screen: Profile,
-				navigationOptions: {
-					title: 'Perfil no Github'
-				}
+				navigationOptions: ({ navigation }) => ({
+					title: `${navigation.state.params.login}'s Profile'`
+				})
 			}
 		},
 		{

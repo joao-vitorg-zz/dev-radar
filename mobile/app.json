@@ -1,22 +1,29 @@
 {
 	"expo": {
-		"name": "mobile",
-		"slug": "mobile",
+		"name": "DevRadar",
+		"description": "Código da aplicação desenvolvida durante a Semana OmniStack 10",
+		"slug": "DevRadar",
+		"backgroundColor": "#7d40e7",
+		"owner": "oDallas",
 		"privacy": "public",
 		"sdkVersion": "36.0.0",
-		"platforms": ["ios", "android", "web"],
-		"version": "1.0.0",
+		"version": "2.0.0",
+		"platforms": ["ios", "android"],
+		"githubUrl": "https://github.com/oDallas/DevRadar/tree/master/mobile",
 		"orientation": "portrait",
+		"primaryColor": "#7d40e7",
 		"icon": "./assets/icon.png",
+		"assetBundlePatterns": ["**/*"],
+		"androidStatusBar": {
+			"barStyle": "light-content",
+			"backgroundColor": "#7D40E7"
+		},
 		"splash": {
-			"image": "./assets/splash.png",
-			"resizeMode": "contain",
-			"backgroundColor": "#ffffff"
+			"backgroundColor": "#7d40e7"
 		},
 		"updates": {
 			"fallbackToCacheTimeout": 0
 		},
-		"assetBundlePatterns": ["**/*"],
 		"ios": {
 			"supportsTablet": true
 		}
