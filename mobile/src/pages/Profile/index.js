@@ -3,7 +3,7 @@ import { WebView } from 'react-native-webview';
 
 import styles from './styles';
 
-function Profile({ navigation }) {
+export default function Profile({ navigation }) {
 	const login = navigation.getParam('login');
 
 	return (
@@ -13,5 +13,3 @@ function Profile({ navigation }) {
 		/>
 	);
 }
-
-export default Profile;
