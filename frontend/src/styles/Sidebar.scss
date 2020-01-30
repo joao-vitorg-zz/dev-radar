@@ -1,7 +1,9 @@
+@import '../utils/colors.scss';
+
 aside {
 	width: 320px;
 	background: white;
-	box-shadow: 0 0 14px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 14px $shadow;
 	border-radius: 2px;
 	padding: 30px 20px;
 

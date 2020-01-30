@@ -1,6 +1,8 @@
+@import '../../utils/colors.scss';
+
 li.dev-item {
 	background: white;
-	box-shadow: 0 0 14px 0 #00000033;
+	box-shadow: 0 0 14px 0 $shadow-light;
 	border-radius: 2px;
 	padding: 20px;
 
@@ -21,18 +23,18 @@ li.dev-item {
 	}
 
 	p {
-		color: #666;
+		color: $gray-ash;
 		font-size: 14px;
 		line-height: 20px;
 		margin: 10px 0;
 	}
 
 	a {
-		color: #8e4dff;
+		color: $purple;
 		font-size: 14px;
 		text-decoration: none;
 		&:hover {
-			color: #5a2ea6;
+			color: $purple-dark;
 		}
 	}
 }
