@@ -20,7 +20,7 @@ module.exports = {
 				);
 
 				const { name = login, id, avatar_url, bio } = response.data;
-				const techsArray = parseStringAsArray(techs);
+				const techsArray = parseStringAsArray(techs).concat('');
 
 				const location = {
 					type: 'Point',
@@ -36,8 +36,6 @@ module.exports = {
 					techs: techsArray,
 					location
 				});
-
-				findConnectionsAndSendMessage(dev, 'newDev');
 			} catch (err) {
 				return res.status(500).send(err.message);
 			}
