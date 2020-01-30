@@ -1,67 +1,66 @@
 import { StyleSheet } from 'react-native';
+import color from '../../utils/colors';
 
-const $white = '#FFF';
-const $backgroundButton = '#8E4DFF';
-const $gray = '#666';
-const $shadow = '#000';
-const $searchColor = '#333';
-
-export default StyleSheet.create({
-	avatar: {
-		borderColor: $white,
+exports.styles = StyleSheet.create({
+	Avatar: {
+		borderColor: 'white',
 		borderRadius: 4,
 		borderWidth: 4,
 		height: 54,
 		width: 54
 	},
-	callout: {
+	Callout: {
 		width: 260
 	},
-	devBio: {
-		color: $gray,
+	DevBio: {
+		color: color.grayAsh,
 		marginTop: 5
 	},
-	devName: {
+	DevName: {
 		fontSize: 16,
-		fontWeight: 'bold'
+		fontWeight: 'bold',
+		borderBottomWidth: 1,
+		borderBottomColor: color.purple
 	},
-	devTechs: {
+	DevTechs: {
 		marginTop: 5
 	},
-	loadButton: {
+	LoadButton: {
 		alignItems: 'center',
-		backgroundColor: $backgroundButton,
+		backgroundColor: color.purple,
 		borderRadius: 25,
 		height: 50,
 		justifyContent: 'center',
 		marginLeft: 15,
 		width: 50
 	},
-	map: {
-		flex: 1
-	},
-	searchForm: {
-		flexDirection: 'row',
-		left: 20,
+	SearchForm: {
 		position: 'absolute',
+		bottom: 20,
+		left: 20,
 		right: 20,
-		top: 20,
+		flexDirection: 'row',
 		zIndex: 5
 	},
-	searchInput: {
-		backgroundColor: $white,
+	SearchInput: {
+		backgroundColor: 'white',
 		borderRadius: 25,
-		color: $searchColor,
-		elevation: 1,
+		color: color.grayDark,
 		flex: 1,
 		fontSize: 16,
 		height: 50,
 		paddingHorizontal: 20,
-		shadowColor: $shadow,
+		elevation: 2,
+		shadowColor: 'black',
 		shadowOffset: {
 			width: 4,
 			height: 4
 		},
 		shadowOpacity: 0.2
+	},
+	MapView: {
+		flex: 1
 	}
 });
+
+exports.color = color;

@@ -1,28 +1,19 @@
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
-import Main from './pages/Main/Main';
-import Profile from './pages/Profile/Profile';
+import SignUp from './pages/SignUp';
+import Main from './pages/Main';
+import Profile from './pages/Profile';
 
-const config = {
-	animation: 'spring',
-	config: {
-		stiffness: 1000,
-		damping: 500,
-		mass: 3,
-		overshootClamping: true,
-		restDisplacementThreshold: 0.01,
-		restSpeedThreshold: 0.01
-	}
-};
+import color from './utils/colors';
 
-const Routes = createAppContainer(
+export default Routes = createAppContainer(
 	createStackNavigator(
 		{
-			Login: {
-				screen: Login,
+			SignUp: {
+				screen: SignUp,
 				navigationOptions: {
-					title: 'Login'
+					title: 'Sign Up'
 				}
 			},
 			Main: {
@@ -34,21 +25,19 @@ const Routes = createAppContainer(
 			Profile: {
 				screen: Profile,
 				navigationOptions: ({ navigation }) => ({
-					title: `${navigation.state.params.login}'s Profile'`
+					title: navigation.state.params.login
 				})
 			}
 		},
 		{
 			defaultNavigationOptions: {
-				headerTintColor: '#FFF',
+				headerTintColor: 'white',
 				headerBackTitleVisible: false,
 				headerTitleAlign: 'center',
 				headerStyle: {
-					backgroundColor: '#7D40E7'
+					backgroundColor: color.purple
 				}
 			}
 		}
 	)
 );
-
-export default Routes;
