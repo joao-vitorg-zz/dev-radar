@@ -21,6 +21,9 @@ form {
 			border: 0;
 			border-bottom: 1px solid $purple;
 
+			&:disabled {
+				background-color: $gray;
+			}
 			&:focus {
 				border-bottom-color: $purple-dark;
 			}

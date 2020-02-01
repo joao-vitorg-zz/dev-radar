@@ -2,29 +2,57 @@ import React, { useState, useEffect } from 'react';
 
 import './styles.scss';
 
-function DevForm({ onSubmit }) {
+function DevForm({ onAdd, onEdit, editMode }) {
+	const [editDev, setEditDev] = editMode;
+
 	const [login, setLogin] = useState('');
 	const [techs, setTechs] = useState('');
 	const [latitude, setLatitude] = useState(0);
 	const [longitude, setLongitude] = useState(0);
 
 	useEffect(() => {
-		navigator.geolocation.getCurrentPosition(
-			position => {
-				const { latitude, longitude } = position.coords;
+		if (!editDev) {
+			navigator.geolocation.getCurrentPosition(
+				position => {
+					const {
+						latitude: currentLatitude,
+						longitude: currentLongitude
+					} = position.coords;
 
-				setLatitude(latitude);
-				setLongitude(longitude);
-			},
-			err => console.error(err.message),
-			{ enableHighAccuracy: true, timeout: 20000 }
-		);
-	}, []);
+					setLatitude(currentLatitude);
+					setLongitude(currentLongitude);
+				},
+				err => console.log(err.message),
+				{ enableHighAccuracy: true, timeout: 20000 }
+			);
+		} else {
+			const {
+				login: editDevLogin,
+				techs: editDevTechs,
+				location: {
+					coordinates: [editDevLatitude, editDevLongitude]
+				}
+			} = editDev;
+
+			setLogin(editDevLogin);
+			setTechs(editDevTechs.join(', '));
+			setLatitude(editDevLatitude);
+			setLongitude(editDevLongitude);
+		}
+	}, [editDev]);
 
 	async function handleSubmit(e) {
 		e.preventDefault();
 
-		await onSubmit({ login, techs, latitude, longitude });
+		if (!editDev) {
+			await onAdd({ login, techs, latitude, longitude });
+		} else {
+			const { _id } = editDev;
+
+			await onEdit(_id, { techs, latitude, longitude });
+
+			setEditDev(null);
+		}
 
 		setLogin('');
 		setTechs('');
@@ -37,6 +65,7 @@ function DevForm({ onSubmit }) {
 				<input
 					name="login"
 					id="login"
+					disabled={editDev}
 					required
 					value={login}
 					onChange={e => setLogin(e.target.value)}
@@ -73,13 +102,13 @@ function DevForm({ onSubmit }) {
 						type="number"
 						id="longitude"
 						required
-						value={latitude}
+						value={longitude}
 						onChange={e => setLongitude(e.target.value)}
 					/>
 				</div>
 			</div>
 
-			<button type="submit">Cadastrar</button>
+			<button type="submit">{editDev ? 'Salvar' : 'Cadastrar'}</button>
 		</form>
 	);
 }
