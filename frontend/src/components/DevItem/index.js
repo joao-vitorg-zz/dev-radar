@@ -1,21 +1,34 @@
 import React from 'react';
+import { DeleteSVG, EditSVG } from '../Icons';
 
 import './styles.scss';
 
-function DevItem({ dev }) {
+function DevItem({ dev, onDelete, onEdit }) {
 	const { login, name, techs, bio, avatar } = dev;
+	const [, setEditDev] = onEdit;
+
+	function editDev() {
+		setEditDev(dev);
+	}
+
+	function deleteDev() {
+		onDelete(dev._id);
+	}
 
 	return (
 		<li className="dev-item">
 			<header>
-				<img src={avatar} alt={name} />
+				<img src={avatar} alt={login} width="54" height="54" />
 				<div className="user-info">
-					<strong>{name}</strong>
+					<a href={`https://github.com/${login}`}>{name}</a>
 					<span>{techs.join(', ')}</span>
+				</div>
+				<div className="tools">
+					<EditSVG onClick={editDev} />
+					<DeleteSVG onClick={deleteDev} />
 				</div>
 			</header>
 			<p>{bio}</p>
-			<a href={`https://github.com/${login}`}>Acessar perfil no Github</a>
 		</li>
 	);
 }
