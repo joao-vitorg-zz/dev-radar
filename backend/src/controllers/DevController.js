@@ -1,54 +1,70 @@
 const axios = require('axios');
 const Dev = require('../models/Dev');
 const parseStringAsArray = require('../utils/parseStringAsArray');
-const { findConnectionsAndSendMessage } = require('../websocket');
 
 module.exports = {
-	async index(req, res) {
-		const devs = await Dev.find();
-		return res.json(devs);
+	index(req, response) {
+		Dev.find()
+			.exec()
+			.then(res => {
+				response.json(res);
+			});
 	},
 
-	async store(req, res) {
+	async store(req, response) {
 		const { login, techs, latitude, longitude } = req.body;
-		let dev = await Dev.findOne({ login });
 
-		if (!dev) {
-			try {
-				const response = await axios.get(
-					`https://api.github.com/users/${login}`
-				);
+		await axios.get(`https://api.github.com/users/${login}`).then(async res => {
+			const { name = login, id, avatar_url, bio } = res.data;
 
-				const { name = login, id, avatar_url, bio } = response.data;
-				const techsArray = parseStringAsArray(techs).concat('');
-
-				const location = {
+			await Dev.create({
+				_id: id,
+				login,
+				avatar: avatar_url,
+				name,
+				bio,
+				techs: parseStringAsArray(techs),
+				location: {
 					type: 'Point',
 					coordinates: [latitude, longitude]
-				};
-
-				dev = await Dev.create({
-					_id: id,
-					login,
-					avatar: avatar_url,
-					name,
-					bio,
-					techs: techsArray,
-					location
+				}
+			})
+				.then(value => {
+					response.json(value);
+				})
+				.catch(reason => {
+					response.status(500).send(reason.errmsg);
 				});
-			} catch (err) {
-				return res.status(500).send(err.message);
+		});
+	},
+
+	async update(req, res) {
+		const { id } = req.params;
+		const { techs, latitude, longitude } = req.body;
+
+		const oldDev = await Dev.findByIdAndUpdate(id, {
+			techs: parseStringAsArray(techs),
+			location: {
+				type: 'Point',
+				coordinates: [latitude, longitude]
 			}
+		});
+
+		if (!oldDev) {
+			return res.status(500).send();
 		}
 
-		return res.json(dev);
+		return res.json(await Dev.findById(id));
 	},
 
 	async destroy(req, res) {
-		const { login } = req.params;
-		await Dev.deleteOne({ login });
+		const { id } = req.params;
+		const deletedDev = await Dev.findByIdAndDelete(id);
 
-		const devs = await Dev.find();
-		return res.json(devs);
+		if (!deletedDev) {
+			return res.status(500).send();
+		}
+
+		return res.json(deletedDev);
 	}
 };
