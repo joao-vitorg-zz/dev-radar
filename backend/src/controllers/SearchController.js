@@ -3,28 +3,28 @@ const Dev = require('../models/Dev');
 
 module.exports = {
 	async index(req, res) {
-		try {
-			const { latitude, longitude, techs } = req.query;
-			const techsArray = techs ? parseStringAsArray(techs) : '';
+		const { latitude, longitude, techs } = req.query;
 
-			const devs = await Dev.find({
-				techs: {
-					$in: techsArray
-				},
-				location: {
-					$near: {
-						$geometry: {
-							type: 'Point',
-							coordinates: [latitude, longitude]
-						},
-						$maxDistance: 5000
-					}
+		const near = {
+			location: {
+				$near: {
+					$geometry: {
+						type: 'Point',
+						coordinates: [latitude, longitude]
+					},
+					$maxDistance: 5000
 				}
-			});
+			}
+		};
 
-			res.json(devs);
-		} catch (err) {
-			res.status(500).send(err.message);
+		try {
+			res.json(
+				await Dev.find(
+					techs ? { techs: { $in: parseStringAsArray(techs) }, ...near } : near
+				)
+			);
+		} catch (e) {
+			res.status(500).json(e.message);
 		}
 	}
 };
