@@ -11,60 +11,77 @@ module.exports = {
 			});
 	},
 
-	async store(req, response) {
+	store(req, response) {
 		const { login, techs, latitude, longitude } = req.body;
 
-		await axios.get(`https://api.github.com/users/${login}`).then(async res => {
-			const { name = login, id, avatar_url, bio } = res.data;
+		axios
+			.get(`https://api.github.com/users/${login}`)
+			.then(res => {
+				const { name = login, id, avatar_url, bio } = res.data;
 
-			await Dev.create({
-				_id: id,
-				login,
-				avatar: avatar_url,
-				name,
-				bio,
+				Dev.create({
+					_id: id,
+					login,
+					avatar: avatar_url,
+					name,
+					bio,
+					techs: parseStringAsArray(techs),
+					location: {
+						type: 'Point',
+						coordinates: [latitude, longitude]
+					}
+				})
+					.then(value => {
+						response.json(value);
+					})
+					.catch(reason => {
+						response.status(500).send(reason.errmsg);
+					});
+			})
+			.catch(() => {
+				response.status(500).send('Usuário inexistente');
+			});
+	},
+
+	update(req, response) {
+		const { id } = req.params;
+		const { techs, latitude, longitude } = req.body;
+
+		Dev.findByIdAndUpdate(
+			id,
+			{
 				techs: parseStringAsArray(techs),
 				location: {
 					type: 'Point',
 					coordinates: [latitude, longitude]
 				}
+			},
+			{ new: true }
+		)
+			.exec()
+			.then(value => {
+				if (!value) {
+					throw Error;
+				}
+
+				response.json(value);
 			})
-				.then(value => {
-					response.json(value);
-				})
-				.catch(reason => {
-					response.status(500).send(reason.errmsg);
-				});
-		});
+			.catch(() => {
+				response.status(500).send('Usuário inexistente');
+			});
 	},
 
-	async update(req, res) {
+	destroy(req, res) {
 		const { id } = req.params;
-		const { techs, latitude, longitude } = req.body;
 
-		const oldDev = await Dev.findByIdAndUpdate(id, {
-			techs: parseStringAsArray(techs),
-			location: {
-				type: 'Point',
-				coordinates: [latitude, longitude]
-			}
-		});
+		Dev.findByIdAndDelete(id)
+			.exec()
+			.then(value => {
+				if (!value) {
+					return res.status(500).send('Usuário inexistente');
+				}
 
-		if (!oldDev) {
-			return res.status(500).send();
-		}
-
-		return res.json(await Dev.findById(id));
-	},
-
-	async destroy(req, res) {
-		const { id } = req.params;
-		const deletedDev = await Dev.findByIdAndDelete(id);
-
-		if (!deletedDev) {
-			return res.status(500).send();
-		}
-
-		return res.json(deletedDev);
+				return res.json(value);
+			});
 	}
 };

@@ -2,7 +2,7 @@ const parseStringAsArray = require('../utils/parseStringAsArray');
 const Dev = require('../models/Dev');
 
 module.exports = {
-	async index(req, res) {
+	index(req, res) {
 		const { latitude, longitude, techs } = req.query;
 
 		const near = {
@@ -17,14 +17,15 @@ module.exports = {
 			}
 		};
 
-		try {
-			res.json(
-				await Dev.find(
-					techs ? { techs: { $in: parseStringAsArray(techs) }, ...near } : near
-				)
-			);
-		} catch (e) {
-			res.status(500).json(e.message);
-		}
+		Dev.find(
+			techs ? { techs: { $in: parseStringAsArray(techs) }, ...near } : near
+		)
+			.exec()
+			.then(value => {
+				res.json(value);
+			})
+			.catch(reason => {
+				res.status(500).json(reason.errmessage);
+			});
 	}
 };

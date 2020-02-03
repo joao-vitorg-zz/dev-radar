@@ -2,13 +2,10 @@ const { Router } = require('express');
 const DevController = require('./controllers/DevController');
 const SearchController = require('./controllers/SearchController');
 
-const routes = Router();
+module.exports = Router()
+	.get('/devs', DevController.index)
+	.post('/devs', DevController.store)
+	.put('/devs/:id', DevController.update)
+	.delete('/devs/:id', DevController.destroy)
 
-routes.get('/devs', DevController.index);
-routes.post('/devs', DevController.store);
-routes.put('/devs/:id', DevController.update);
-routes.delete('/devs/:id', DevController.destroy);
-
-routes.get('/search', SearchController.index);
-
-module.exports = routes;
+	.get('/search', SearchController.index);

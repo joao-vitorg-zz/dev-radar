@@ -1,6 +1,15 @@
-# Rotas do Backend
+# DevRadar Backend
 
-## Dev
+## Iniciar o servidor
+
+Para iniciar o servidor basta executar o comando abaixo. A porta padrão do servidor é **3333**, caso queira mudar a porta, basta alterar o arquivo **index.js**
+
+```bash
+yarn start  #ou
+npm start
+```
+
+## Rota Dev
 
 ### Index
 
@@ -44,7 +53,7 @@ Para deletar um Dev do banco de dados, basta mandar uma requisição **DELETE** 
 api.delete('dev/<id>');
 ```
 
-## Search
+## Rota Search
 
 Para procurar Devs em uma determinada região, basta mandar uma requisição **GET** no caminho **/search** para o servidor com a **latidude**, **longitude** e caso nessesário **techs**
 
