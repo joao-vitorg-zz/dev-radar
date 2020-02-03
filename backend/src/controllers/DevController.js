@@ -17,14 +17,15 @@ module.exports = {
 		axios
 			.get(`https://api.github.com/users/${login}`)
 			.then(res => {
-				const { name = login, id, avatar_url, bio } = res.data;
+				const { name = login, id, blog, bio } = res.data;
 
 				Dev.create({
 					_id: id,
 					login,
-					avatar: avatar_url,
+					avatar: `https://avatars2.githubusercontent.com/u/${id}?v=4&s=54`,
 					name,
 					bio,
+					blog,
 					techs: parseStringAsArray(techs),
 					location: {
 						type: 'Point',
