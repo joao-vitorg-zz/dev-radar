@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import './styles.scss';
 
-function DevForm({ onAdd, onEdit, editMode }) {
+export default function DevForm({ onAdd, onEdit, editMode }) {
 	const [editDev, setEditDev] = editMode;
 
 	const [login, setLogin] = useState('');
@@ -112,5 +112,3 @@ function DevForm({ onAdd, onEdit, editMode }) {
 		</form>
 	);
 }
-
-export default DevForm;

@@ -2,9 +2,9 @@
 
 O frontend da aplicação foi construído em NodeJs e ReactJs
 
-## configuração inicial
+## Configuração inicial
 
-Você prescisa editar o arquivo **/src/services/api.js** com o **IP** e a **PORTA** do backend.
+É preciso editar o arquivo **/src/services/api.js** com o **IP** e a **PORTA** do backend.
 
 ## Executar o App
 

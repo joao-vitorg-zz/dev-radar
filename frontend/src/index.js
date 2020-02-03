@@ -37,11 +37,16 @@ function App() {
 	}
 
 	function handledEditDev(id, data) {
-		api.put(`/devs/${id}`, data).then(res => {
-			const othersDevs = devs.filter(({ _id }) => _id !== id);
+		api
+			.put(`/devs/${id}`, data)
+			.then(res => {
+				const othersDevs = devs.filter(({ _id }) => _id !== id);
 
-			setDevs([...othersDevs, res.data]);
-		});
+				setDevs([...othersDevs, res.data]);
+			})
+			.catch(reason => {
+				alert(reason);
+			});
 	}
 
 	function handledDeleteDev(id) {
@@ -50,7 +55,10 @@ function App() {
 		if (confirm) {
 			api
 				.delete(`/devs/${id}`)
-				.then(() => setDevs(devs.filter(({ _id }) => _id !== id)));
+				.then(() => setDevs(devs.filter(({ _id }) => _id !== id)))
+				.catch(reason => {
+					alert(reason);
+				});
 		}
 	}
 
