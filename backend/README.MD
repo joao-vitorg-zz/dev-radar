@@ -1,15 +1,22 @@
 # DevRadar Backend
 
-## Iniciar o servidor
-
-Para iniciar o servidor basta executar o comando abaixo. A porta padrão do servidor é **3333**, caso queira mudar a porta, basta alterar o arquivo **index.js**
+## Instalação
 
 ```bash
-yarn start  #ou
+yarn
+yarn start
+```
+
+### Ou
+
+```bash
+npm
 npm start
 ```
 
-## Rota Dev
+Para configurar a **porta** do servidor ou o **path** do MongoDB, basta alterar o arquivo **.env**.
+
+## Rotas
 
 ### Index
 
@@ -51,18 +58,4 @@ Para deletar um Dev do banco de dados, basta mandar uma requisição **DELETE** 
 
 ```javascript
 api.delete('dev/<id>');
-```
-
-## Rota Search
-
-Para procurar Devs em uma determinada região, basta mandar uma requisição **GET** no caminho **/search** para o servidor com a **latidude**, **longitude** e caso nessesário **techs**
-
-```javascript
-api.get('/search', {
- params: {
-  <latitude>,
-  <longitude>,
-  <techs>
- }
-});
 ```
