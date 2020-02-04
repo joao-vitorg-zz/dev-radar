@@ -4,17 +4,27 @@
 
 ```bash
 yarn
-yarn start
 ```
 
 ### Ou
 
 ```bash
 npm
-npm start
 ```
 
-Para configurar a **porta** do servidor ou o **path** do MongoDB, basta alterar o arquivo **.env**.
+Para configurar a **PORTA** do servidor ou o **PATH** do MongoDB, basta alterar o arquivo **.env**.
+
+## Uso
+
+```bash
+yarn start
+```
+
+### Ou
+
+```bash
+npm start
+```
 
 ## Rotas
 

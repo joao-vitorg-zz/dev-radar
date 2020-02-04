@@ -1,14 +1,14 @@
 main {
-	flex: 1;
+  flex: 1;
 
-	ul {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 20px;
-		list-style: none;
+  ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    list-style: none;
 
-		@media (max-width: 650px) {
-			grid-template-columns: 1fr;
-		}
-	}
+    @media (max-width: 650px) {
+      grid-template-columns: 1fr;
+    }
+  }
 }

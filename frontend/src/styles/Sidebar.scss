@@ -1,14 +1,14 @@
 @import '../utils/colors.scss';
 
 aside {
-	width: 320px;
-	background: white;
-	box-shadow: 0 0 14px $shadow;
-	border-radius: 2px;
-	padding: 30px 20px;
+  width: 320px;
+  background: white;
+  box-shadow: 0 0 14px $shadow;
+  border-radius: 2px;
+  padding: 30px 20px;
 
-	svg {
-		width: 100%;
-		max-height: 74px;
-	}
+  svg {
+    width: 100%;
+    max-height: 74px;
+  }
 }

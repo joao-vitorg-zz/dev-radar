@@ -1,73 +1,73 @@
 @import '../../utils/colors.scss';
 
 li.dev-item {
-	background: white;
-	box-shadow: 0 0 14px 0 $shadow-light;
-	border-radius: 2px;
-	padding: 20px;
+  background: white;
+  box-shadow: 0 0 14px 0 $shadow-light;
+  border-radius: 2px;
+  padding: 20px;
 
-	p {
-		color: $gray-ash;
-		font-size: 14px;
-		line-height: 20px;
-		margin-top: 10px;
-	}
+  p {
+    color: $gray-ash;
+    font-size: 14px;
+    line-height: 20px;
+    margin-top: 10px;
+  }
 
-	a {
-		font-weight: bold;
-		display: block;
-		font-size: 14px;
-		margin-top: 15px;
-		color: $purple;
-		text-decoration: none;
-		&:hover {
-			color: $purple-dark;
-		}
-	}
+  a {
+    font-weight: bold;
+    display: block;
+    font-size: 14px;
+    margin-top: 15px;
+    color: $purple;
+    text-decoration: none;
+    &:hover {
+      color: $purple-dark;
+    }
+  }
 
-	header {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
+  header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
-		img {
-			width: 54px;
-			height: 54px;
-			border-radius: 50%;
-		}
+    img {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+    }
 
-		.user-info {
-			margin-left: 10px;
+    .user-info {
+      margin-left: 10px;
 
-			a {
-				font-size: 16px;
-				margin: 0px;
-			}
+      a {
+        font-size: 16px;
+        margin: 0px;
+      }
 
-			span {
-				font-size: 13px;
-				color: $gray-ash;
-				margin: 2px;
-			}
-		}
+      span {
+        font-size: 13px;
+        color: $gray-ash;
+        margin: 2px;
+      }
+    }
 
-		.tools {
-			margin: -40px -10px 0 auto;
+    .tools {
+      margin: -40px -10px 0 auto;
 
-			svg {
-				width: 24px;
-				height: 24px;
-				cursor: pointer;
-				&:hover {
-					path {
-						fill: $purple-dark;
-					}
-				}
+      svg {
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        &:hover {
+          path {
+            fill: $purple-dark;
+          }
+        }
 
-				path {
-					fill: $gray-dark;
-				}
-			}
-		}
-	}
+        path {
+          fill: $gray-dark;
+        }
+      }
+    }
+  }
 }
