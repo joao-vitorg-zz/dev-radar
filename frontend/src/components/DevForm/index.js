@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
+import api from '../../services/api';
+
 import './styles.scss';
 
-export default function DevForm({ onAdd, onEdit, editMode }) {
+export default function DevForm({ editMode }) {
   const [editDev, setEditDev] = editMode;
 
   const [login, setLogin] = useState('');
@@ -40,17 +42,42 @@ export default function DevForm({ onAdd, onEdit, editMode }) {
     }
   }, [editDev]);
 
+  function handledAddDev() {
+    api
+      .post('/devs', {
+        login,
+        techs,
+        latitude,
+        longitude
+      })
+      .catch(() => {
+        alert('Não foi possível criar o usuário');
+      });
+  }
+
+  function handledEditDev() {
+    const { _id } = editDev;
+
+    api
+      .put(`/devs/${_id}`, {
+        techs,
+        latitude,
+        longitude
+      })
+      .catch(() => {
+        alert('Não foi possível criar o usuário');
+      });
+
+    setEditDev(null);
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
 
     if (!editDev) {
-      await onAdd({ login, techs, latitude, longitude });
+      handledAddDev();
     } else {
-      const { _id } = editDev;
-
-      await onEdit(_id, { techs, latitude, longitude });
-
-      setEditDev(null);
+      handledEditDev();
     }
 
     setLogin('');

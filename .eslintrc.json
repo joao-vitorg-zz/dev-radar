@@ -1,38 +1,33 @@
 {
-	"extends": [
-		"airbnb",
-		"plugin:prettier/recommended",
-		"prettier/react",
-		"plugin:react-hooks"
-	],
-	"env": {
-		"browser": true,
-		"commonjs": true,
-		"es6": true,
-		"jest": true,
-		"node": true
-	},
-	"rules": {
-		"react/prop-types": "off",
-		"camelcase": "off",
-		"no-underscore-dangle": "off",
-		"no-console": "off",
-		"react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
-		"max-len": [
-			"warn",
-			{
-				"code": 80,
-				"tabWidth": 2,
-				"comments": 80,
-				"ignoreComments": false,
-				"ignoreTrailingComments": true,
-				"ignoreUrls": true,
-				"ignoreStrings": true,
-				"ignoreTemplateLiterals": true,
-				"ignoreRegExpLiterals": true
-			}
-		],
-		"react-hooks/rules-of-hooks": "error",
-		"react-hooks/exhaustive-deps": "warn"
-	}
+  "extends": ["airbnb", "plugin:prettier/recommended", "prettier/react"],
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "jest": true,
+    "node": true
+  },
+  "rules": {
+    "no-alert": "off",
+    "camelcase": "off",
+    "import/named": "off",
+    "react/prop-types": "off",
+    "no-underscore-dangle": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
+    "max-len": [
+      "warn",
+      {
+        "code": 80,
+        "tabWidth": 2,
+        "comments": 80,
+        "ignoreComments": false,
+        "ignoreTrailingComments": true,
+        "ignoreUrls": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreRegExpLiterals": true
+      }
+    ]
+  }
 }

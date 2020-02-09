@@ -5,6 +5,9 @@ li.dev-item {
   box-shadow: 0 0 14px 0 $shadow-light;
   border-radius: 2px;
   padding: 20px;
+  display: inline-block;
+  margin: 0 0 20px;
+  width: 100%;
 
   p {
     color: $gray-ash;
@@ -45,6 +48,7 @@ li.dev-item {
       }
 
       span {
+        font-style: italic;
         font-size: 13px;
         color: $gray-ash;
         margin: 2px;

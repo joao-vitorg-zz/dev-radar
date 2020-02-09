@@ -1,21 +1,21 @@
 {
-	"name": "dev-radar",
-	"version": "1.0.0",
-	"main": "index.js",
-	"license": "MIT",
-	"description": "O DevRadar é um projeto que visa conectar desenvolvedores próximos a você que trabalham com as mesmas tecnologias.",
-	"repository": "https://github.com/oDallas/DevRadar",
-	"author": "oDallas",
-	"devDependencies": {
-		"babel-eslint": "^10.0.3",
-		"eslint": "^6.8.0",
-		"eslint-config-airbnb": "^18.0.1",
-		"eslint-config-prettier": "^6.9.0",
-		"eslint-plugin-import": "^2.20.0",
-		"eslint-plugin-jsx-a11y": "^6.2.3",
-		"eslint-plugin-prettier": "^3.1.2",
-		"eslint-plugin-react": "^7.18.0",
-		"eslint-plugin-react-hooks": "^2.3.0",
-		"prettier": "^1.19.1"
-	}
+  "name": "dev-radar",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "description": "O DevRadar é um projeto que visa conectar desenvolvedores próximos a você que trabalham com as mesmas tecnologias.",
+  "repository": "https://github.com/oDallas/DevRadar",
+  "author": "oDallas",
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.18.0",
+    "prettier": "^1.19.1"
+  },
+  "dependencies": {}
 }

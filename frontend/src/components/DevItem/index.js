@@ -1,18 +1,26 @@
 import React from 'react';
 import { DeleteSVG, EditSVG } from '../Icons';
 
+import api from '../../services/api';
+
 import './styles.scss';
 
-export default function DevItem({ dev, onDelete, onEdit }) {
-  const { login, name, techs, bio, blog, avatar } = dev;
+export default function DevItem({ dev, onEdit }) {
+  const { _id, login, name, techs, bio, blog, avatar } = dev;
   const [, setEditDev] = onEdit;
 
   function editDev() {
     setEditDev(dev);
   }
 
-  function deleteDev() {
-    onDelete(dev._id);
+  function handlerDeleteDev() {
+    const confirm = global.confirm('Deseja mesmo deletar?');
+
+    if (confirm) {
+      api.delete(`/devs/${_id}`).catch(reason => {
+        alert(reason);
+      });
+    }
   }
 
   return (
@@ -29,7 +37,7 @@ export default function DevItem({ dev, onDelete, onEdit }) {
 
         <div className="tools">
           <EditSVG onClick={editDev} />
-          <DeleteSVG onClick={deleteDev} />
+          <DeleteSVG onClick={handlerDeleteDev} />
         </div>
       </header>
 

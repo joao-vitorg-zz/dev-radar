@@ -27,52 +27,17 @@ function App() {
     updateConnection(devs, setDevs);
   }, [devs]);
 
-  function handledAddDev(data) {
-    const hasDev = devs.some(({ login }) => login === data.login);
-
-    if (!hasDev) {
-      api.post('/devs', data).catch(() => {
-        alert('Usuário não existe!');
-      });
-    } else {
-      alert('Usuário já cadastrado!');
-    }
-  }
-
-  function handledEditDev(id, data) {
-    api.put(`/devs/${id}`, data).catch(reason => alert(reason));
-  }
-
-  function handledDeleteDev(id) {
-    const confirm = global.confirm('Deseja mesmo deletar?');
-
-    if (confirm) {
-      api.delete(`/devs/${id}`).catch(reason => {
-        alert(reason);
-      });
-    }
-  }
-
   return (
     <div id="app">
       <aside>
         <LogoSVG />
-        <DevForm
-          onAdd={handledAddDev}
-          onEdit={handledEditDev}
-          editMode={editDevMode}
-        />
+        <DevForm editMode={editDevMode} />
       </aside>
 
       <main>
         <ul>
           {devs.map(dev => (
-            <DevItem
-              key={dev._id}
-              dev={dev}
-              onEdit={editDevMode}
-              onDelete={handledDeleteDev}
-            />
+            <DevItem key={dev._id} dev={dev} onEdit={editDevMode} />
           ))}
         </ul>
       </main>
