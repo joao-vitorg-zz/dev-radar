@@ -1,6 +1,6 @@
-# DevRadar Frontend
+# DevRadar Mobile
 
-O frontend da aplicação foi construído em NodeJs e ReactJs
+O Mobile da aplicação foi construído em Expo e React Native
 
 ## Instalação e execução
 
@@ -17,6 +17,3 @@ yarn start
 npm
 npm start
 ```
-
-Basta digitar o comando acima que o react abrira um servidor no caminho
-<http://localhost:3000>

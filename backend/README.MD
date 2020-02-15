@@ -1,28 +1,18 @@
 # DevRadar Backend
 
-## Instalação
-
-```bash
-yarn
-```
-
-### Ou
-
-```bash
-npm
-```
+## Instalação e execução
 
 Para configurar a **PORTA** do servidor ou o **PATH** do MongoDB, basta alterar o arquivo **.env**.
 
-## Uso
-
 ```bash
+yarn
 yarn start
 ```
 
-### Ou
+### ou
 
 ```bash
+npm
 npm start
 ```
 
