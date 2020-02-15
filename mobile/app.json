@@ -1,31 +1,45 @@
 {
-	"expo": {
-		"name": "DevRadar",
-		"description": "Código da aplicação desenvolvida durante a Semana OmniStack 10",
-		"slug": "DevRadar",
-		"backgroundColor": "#7d40e7",
-		"owner": "oDallas",
-		"privacy": "public",
-		"sdkVersion": "36.0.0",
-		"version": "2.0.0",
-		"platforms": ["ios", "android"],
-		"githubUrl": "https://github.com/oDallas/DevRadar/tree/master/mobile",
-		"orientation": "portrait",
-		"primaryColor": "#7d40e7",
-		"icon": "./assets/icon.png",
-		"assetBundlePatterns": ["**/*"],
-		"androidStatusBar": {
-			"barStyle": "light-content",
-			"backgroundColor": "#7D40E7"
-		},
-		"splash": {
-			"backgroundColor": "#7d40e7"
-		},
-		"updates": {
-			"fallbackToCacheTimeout": 0
-		},
-		"ios": {
-			"supportsTablet": true
-		}
-	}
+  "expo": {
+    "name": "DevRadar",
+    "description": "Código da aplicação desenvolvida durante a Semana OmniStack 10",
+    "slug": "DevRadar",
+    "owner": "oDallas",
+    "privacy": "public",
+    "sdkVersion": "36.0.0",
+    "version": "1.0.0",
+    "platforms": ["ios", "android"],
+    "githubUrl": "https://github.com/oDallas/DevRadar/tree/master/mobile",
+    "orientation": "portrait",
+    "primaryColor": "#7d40e7",
+    "backgroundColor": "#7D40E7",
+    "icon": "./assets/icon.png",
+    "assetBundlePatterns": ["**/*"],
+    "androidStatusBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "#7D40E7"
+    },
+    "androidNavigationBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "#7D40E7"
+    },
+    "splash": {
+      "backgroundColor": "#7d40e7"
+    },
+    "android": {
+      "package": "com.odallas.devradar",
+      "versionCode": 1,
+      "backgroundColor": "#7D40E7",
+      "icon": "./assets/icon.png",
+      "permissions": ["ACCESS_FINE_LOCATION"],
+      "splash": {
+        "backgroundColor": "#7D40E7"
+      }
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "ios": {
+      "supportsTablet": true
+    }
+  }
 }

@@ -6,7 +6,7 @@ import DevForm from './components/DevForm';
 import { LogoSVG } from './components/Icons';
 
 import api from './services/api';
-import updateConnection from './services/socket';
+import socket from './services/socket';
 
 import './styles/Sidebar.scss';
 import './styles/global.scss';
@@ -24,7 +24,18 @@ function App() {
 
   // Atualiza os dados do SocketIO
   useEffect(() => {
-    updateConnection(devs, setDevs);
+    socket
+      .on('addDev', value => {
+        if (!devs.some(({ _id }) => _id === value._id)) {
+          setDevs([...devs, value]);
+        }
+      })
+      .on('editDev', value => {
+        setDevs(devs.map(dev => (dev._id === value._id ? value : dev)));
+      })
+      .on('deleteDev', ({ _id }) => {
+        setDevs(devs.filter(({ _id: devId }) => devId !== _id));
+      });
   }, [devs]);
 
   return (
