@@ -1,43 +1,35 @@
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import React from 'react';
 
-import SignUp from './pages/SignUp';
+import { createAppContainer } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+
 import Main from './pages/Main';
-import Profile from './pages/Profile';
+import MapView from './pages/Map';
+import Devs from './pages/Devs';
+
+import { MainSVG, MapSVG, DevsSVG } from './components/Icons';
 
 import color from './utils/colors';
 
-export default Routes = createAppContainer(
-	createStackNavigator(
-		{
-			SignUp: {
-				screen: SignUp,
-				navigationOptions: {
-					title: 'Sign Up'
-				}
-			},
-			Main: {
-				screen: Main,
-				navigationOptions: {
-					title: 'DevRadar'
-				}
-			},
-			Profile: {
-				screen: Profile,
-				navigationOptions: ({ navigation }) => ({
-					title: navigation.state.params.login
-				})
-			}
-		},
-		{
-			defaultNavigationOptions: {
-				headerTintColor: 'white',
-				headerBackTitleVisible: false,
-				headerTitleAlign: 'center',
-				headerStyle: {
-					backgroundColor: color.purple
-				}
-			}
-		}
-	)
+export default createAppContainer(
+  createBottomTabNavigator(
+    {
+      Main: { screen: Main, navigationOptions: { tabBarIcon: <MainSVG /> } },
+      Map: { screen: MapView, navigationOptions: { tabBarIcon: <MapSVG /> } },
+      Devs: { screen: Devs, navigationOptions: { tabBarIcon: <DevsSVG /> } }
+    },
+    {
+      initialRouteName: 'Map',
+      tabBarOptions: {
+        activeBackgroundColor: color.purpleDark,
+        inactiveBackgroundColor: color.purple,
+        labelStyle: {
+          fontSize: 14,
+          fontFamily: 'Roboto',
+          fontWeight: 'bold',
+          color: 'white'
+        }
+      }
+    }
+  )
 );

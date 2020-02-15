@@ -1,93 +1,145 @@
-import React, { useEffect, useState } from 'react';
-import { Image, View, Text, TextInput, TouchableOpacity } from 'react-native';
-import MapView, { Marker, Callout } from 'react-native-maps';
-import { MaterialIcons } from '@expo/vector-icons';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Alert, TouchableOpacity } from 'react-native';
+import {
+  getCurrentPositionAsync,
+  requestPermissionsAsync
+} from 'expo-location';
 
 import api from '../../service/api';
 
-import { styles, color } from './styles';
+import InputBlock from '../../components/InputBlock';
+import { LogoSvg } from '../../components/Icons';
 
-export default function Main({ navigation }) {
-	const [techs, setTechs] = useState('');
-	const [devs, setDevs] = useState([]);
-	const [currentRegion, setCurrentRegion] = useState({
-		latitude: navigation.getParam('latitude'),
-		longitude: navigation.getParam('longitude'),
-		latitudeDelta: 0.005,
-		longitudeDelta: 0.005
-	});
+import styles from './styles';
 
-	async function loadDevs() {
-		const { latitude, longitude } = currentRegion;
+export default ({ screenProps }) => {
+  const [editDev, setEditDev] = screenProps.editDevState;
 
-		const res = await api.get('/search', {
-			params: {
-				latitude,
-				longitude,
-				techs
-			}
-		});
+  const [login, setLogin] = useState('');
+  const [techs, setTechs] = useState('');
+  const [latitude, setLatitude] = useState(0);
+  const [longitude, setLongitude] = useState(0);
 
-		setDevs(res.data);
-	}
+  useEffect(() => {
+    if (!editDev) {
+      requestPermissionsAsync(
+        getCurrentPositionAsync({
+          enableHighAccuracy: true
+        }).then(value => {
+          const {
+            coords: { latitude: currentLatitude, longitude: currentLongitude }
+          } = value;
 
-	async function handledRegionChanged(region) {
-		setCurrentRegion(region);
-		loadDevs();
-	}
+          setLatitude(currentLatitude);
+          setLongitude(currentLongitude);
+        })
+      );
+    } else {
+      const {
+        login: editDevLogin,
+        techs: editDevTechs,
+        latitude: editDevLatitude,
+        longitude: editDevLongitude
+      } = editDev;
 
-	return (
-		<>
-			<MapView
-				onRegionChangeComplete={handledRegionChanged}
-				initialRegion={currentRegion}
-				style={styles.MapView}
-				rotateEnabled={false}
-			>
-				{devs.map(dev => (
-					<Marker
-						key={dev._id}
-						coordinate={{
-							latitude: dev.location.coordinates[0],
-							longitude: dev.location.coordinates[1]
-						}}
-					>
-						<Image style={styles.Avatar} source={{ uri: dev.avatar }} />
+      setLogin(editDevLogin);
+      setTechs(editDevTechs.join(', '));
+      setLatitude(editDevLatitude);
+      setLongitude(editDevLongitude);
+    }
+  }, [editDev]);
 
-						<Callout
-							onPress={() => {
-								navigation.navigate('Profile', {
-									login: dev.login
-								});
-							}}
-						>
-							<View style={styles.Callout}>
-								<Text style={styles.DevName}>{dev.name}</Text>
-								<Text style={styles.DevBio}>{dev.bio}</Text>
-								<Text style={styles.DevTechs}>{dev.techs.join(', ')}</Text>
-							</View>
-						</Callout>
-					</Marker>
-				))}
-			</MapView>
+  function onAdd() {
+    api
+      .post('/devs', {
+        login,
+        techs,
+        latitude,
+        longitude
+      })
+      .catch(() => {
+        Alert.alert('Erro!', 'Não foi possível criar o usuário');
+      });
+  }
 
-			<View style={styles.SearchForm}>
-				<TextInput
-					style={styles.SearchInput}
-					placeholder="Buscar devs por techs..."
-					placeholderTextColor={color.greyLight}
-					autoCapitalize="words"
-					autoCorrect={false}
-					value={techs}
-					onChangeText={text => setTechs(text)}
-					onSubmitEditing={loadDevs}
-					returnKeyType="search"
-				/>
+  function onEdit() {
+    const { _id } = editDev;
 
-				<TouchableOpacity onPress={loadDevs} style={styles.LoadButton}>
-					<MaterialIcons name="my-location" size={20} color="white" />
-				</TouchableOpacity>
-			</View>
-		</>
-	);
-}
+    api
+      .put(`/devs/${_id}`, {
+        login,
+        techs,
+        latitude,
+        longitude
+      })
+      .catch(() => {
+        Alert.alert('Erro!', 'Não foi possível editar o usuário');
+      });
+
+    setEditDev(null);
+  }
+
+  function handleSubmit() {
+    if (!editDev) {
+      onAdd();
+    } else {
+      onEdit();
+    }
+
+    setLogin('');
+    setTechs('');
+  }
+
+  return (
+    <View style={styles.Container}>
+      <View style={styles.Form}>
+        <LogoSvg />
+
+        <InputBlock
+          label="Usuário do Github"
+          value={[login, setLogin]}
+          id="login"
+          next="techs"
+          style={{ marginTop: 50 }}
+          editable={editDev}
+        />
+
+        <InputBlock
+          label="Tecnologías"
+          value={[techs, setTechs]}
+          id="techs"
+          next="latitude"
+        />
+
+        <View style={styles.InputGroup}>
+          <InputBlock
+            label="Latitude"
+            value={[latitude, setLatitude]}
+            id="latitude"
+            next="longitude"
+            type="numeric"
+            style={{
+              flex: 1,
+              marginRight: 20
+            }}
+          />
+
+          <InputBlock
+            label="Longitude"
+            value={[longitude, setLongitude]}
+            id="longitude"
+            type="numeric"
+            submit={handleSubmit}
+            style={{ flex: 1 }}
+          />
+        </View>
+
+        <TouchableOpacity style={styles.Button} onPress={handleSubmit}>
+          <Text style={styles.ButtonText}>
+            {editDev ? 'Salvar' : 'Cadastrar'}
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
