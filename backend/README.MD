@@ -1,6 +1,6 @@
-# DevRadar Backend
+# 🖥️ Backend
 
-## Instalação e execução
+## 💿 Instalação e execução
 
 Para configurar a **PORTA** do servidor ou o **PATH** do MongoDB, basta alterar o arquivo **.env**.
 
@@ -16,7 +16,7 @@ npm
 npm start
 ```
 
-## Rotas
+## 🛠️ Rotas
 
 ### Index
 
