@@ -18,6 +18,7 @@
     "prettier": "^1.19.1"
   },
   "dependencies": {
-    "acorn": "^7.1.1"
+    "acorn": "^7.1.1",
+    "minimist": "^1.2.2"
   }
 }
