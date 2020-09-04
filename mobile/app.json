@@ -5,15 +5,19 @@
     "slug": "DevRadar",
     "owner": "oDallas",
     "privacy": "public",
-    "sdkVersion": "36.0.0",
     "version": "1.0.0",
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "githubUrl": "https://github.com/oDallas/DevRadar/tree/master/mobile",
     "orientation": "portrait",
     "primaryColor": "#7d40e7",
     "backgroundColor": "#7D40E7",
     "icon": "./assets/icon.png",
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "androidStatusBar": {
       "barStyle": "light-content",
       "backgroundColor": "#7D40E7"
@@ -30,7 +34,9 @@
       "versionCode": 1,
       "backgroundColor": "#7D40E7",
       "icon": "./assets/icon.png",
-      "permissions": ["ACCESS_FINE_LOCATION"],
+      "permissions": [
+        "ACCESS_FINE_LOCATION"
+      ],
       "splash": {
         "backgroundColor": "#7D40E7"
       }

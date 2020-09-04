@@ -8,7 +8,6 @@ import {
 import api from '../../service/api';
 
 import InputBlock from '../../components/InputBlock';
-import { LogoSvg } from '../../components/Icons';
 
 import styles from './styles';
 
@@ -93,8 +92,6 @@ export default ({ screenProps }) => {
   return (
     <View style={styles.Container}>
       <View style={styles.Form}>
-        <LogoSvg />
-
         <InputBlock
           label="Usuário do Github"
           value={[login, setLogin]}
