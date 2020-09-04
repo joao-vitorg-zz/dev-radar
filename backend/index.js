@@ -10,7 +10,7 @@ mongoose.connect(`mongodb://localhost:27017/week10`, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useCreateIndex: true,
-  useFindAndModify: false
+  useFindAndModify: false,
 });
 
 const app = express();

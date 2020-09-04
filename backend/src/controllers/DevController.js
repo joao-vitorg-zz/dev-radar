@@ -5,14 +5,14 @@ const parseStringAsArray = require('../utils/parseStringAsArray');
 const {
   handlerAddDev,
   handlerEditDev,
-  handlerDeleteDev
+  handlerDeleteDev,
 } = require('../webSocket');
 
 module.exports = {
   index(req, response) {
     Dev.find()
       .exec()
-      .then(res => {
+      .then((res) => {
         response.json(res);
       });
   },
@@ -22,7 +22,7 @@ module.exports = {
 
     axios
       .get(`https://api.github.com/users/${login}`)
-      .then(res => {
+      .then((res) => {
         const { name = login, id, blog, bio } = res.data;
 
         Dev.create({
@@ -34,14 +34,14 @@ module.exports = {
           blog,
           techs: parseStringAsArray(techs),
           latitude,
-          longitude
+          longitude,
         })
-          .then(value => {
+          .then((value) => {
             handlerAddDev(value);
 
             response.json(value);
           })
-          .catch(reason => {
+          .catch((reason) => {
             response.status(500).send(reason.errmsg);
           });
       })
@@ -59,12 +59,12 @@ module.exports = {
       {
         techs: parseStringAsArray(techs),
         latitude,
-        longitude
+        longitude,
       },
       { new: true }
     )
       .exec()
-      .then(value => {
+      .then((value) => {
         if (!value) {
           throw Error;
         }
@@ -82,7 +82,7 @@ module.exports = {
 
     Dev.findByIdAndDelete(id)
       .exec()
-      .then(value => {
+      .then((value) => {
         if (!value) {
           return res.status(500).send('Usuário inexistente');
         }
@@ -90,5 +90,5 @@ module.exports = {
 
         return res.json(value);
       });
-  }
+  },
 };

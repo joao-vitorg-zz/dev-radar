@@ -13,6 +13,6 @@ module.exports = mongoose.model(
     avatar: { type: String, required: true },
     name: { type: String, required: true },
     blog: { type: String },
-    bio: { type: String }
+    bio: { type: String },
   })
 );
