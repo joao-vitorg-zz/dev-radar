@@ -22,7 +22,7 @@
 
 <br>
 
-<img alt="Frontend" src=".github/web.gif" width="100%">
+<img alt="Frontend" src=".github/web.png" width="100%">
 
 <p align="center">
   <img alt="Mobile" src=".github/app.gif" width="35%">
