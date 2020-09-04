@@ -25,7 +25,7 @@
 <img alt="Frontend" src=".github/web.png" width="100%">
 
 <p align="center">
-  <img alt="Mobile" src=".github/app.png" width="35%">
+  <img alt="Mobile" src=".github/app.jng" width="35%">
 </p>
 
 ## 🚀 Tecnologias
