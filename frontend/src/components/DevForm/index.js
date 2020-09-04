@@ -15,16 +15,16 @@ export default function DevForm({ editMode }) {
   useEffect(() => {
     if (!editDev) {
       navigator.geolocation.getCurrentPosition(
-        position => {
+        (position) => {
           const {
             latitude: currentLatitude,
-            longitude: currentLongitude
+            longitude: currentLongitude,
           } = position.coords;
 
           setLatitude(currentLatitude);
           setLongitude(currentLongitude);
         },
-        err => console.log(err.message),
+        (err) => console.log(err.message),
         { enableHighAccuracy: true, timeout: 20000 }
       );
     } else {
@@ -32,7 +32,7 @@ export default function DevForm({ editMode }) {
         login: editDevLogin,
         techs: editDevTechs,
         latitude: editDevLatitude,
-        longitude: editDevLongitude
+        longitude: editDevLongitude,
       } = editDev;
 
       setLogin(editDevLogin);
@@ -48,7 +48,7 @@ export default function DevForm({ editMode }) {
         login,
         techs,
         latitude,
-        longitude
+        longitude,
       })
       .catch(() => {
         alert('Não foi possível criar o usuário');
@@ -62,7 +62,7 @@ export default function DevForm({ editMode }) {
       .put(`/devs/${_id}`, {
         techs,
         latitude,
-        longitude
+        longitude,
       })
       .catch(() => {
         alert('Não foi possível criar o usuário');
@@ -94,7 +94,7 @@ export default function DevForm({ editMode }) {
           disabled={editDev}
           required
           value={login}
-          onChange={e => setLogin(e.target.value)}
+          onChange={(e) => setLogin(e.target.value)}
         />
       </div>
 
@@ -105,7 +105,7 @@ export default function DevForm({ editMode }) {
           id="techs"
           required
           value={techs}
-          onChange={e => setTechs(e.target.value)}
+          onChange={(e) => setTechs(e.target.value)}
         />
       </div>
       <div className="input-group">
@@ -117,7 +117,7 @@ export default function DevForm({ editMode }) {
             id="latitude"
             required
             value={latitude}
-            onChange={e => setLatitude(e.target.value)}
+            onChange={(e) => setLatitude(e.target.value)}
           />
         </div>
 
@@ -129,7 +129,7 @@ export default function DevForm({ editMode }) {
             id="longitude"
             required
             value={longitude}
-            onChange={e => setLongitude(e.target.value)}
+            onChange={(e) => setLongitude(e.target.value)}
           />
         </div>
       </div>

@@ -19,19 +19,19 @@ function App() {
 
   // Carrega os Devs
   useEffect(() => {
-    api.get('/devs').then(res => setDevs(res.data));
+    api.get('/devs').then((res) => setDevs(res.data));
   }, []);
 
   // Atualiza os dados do SocketIO
   useEffect(() => {
     socket
-      .on('addDev', value => {
+      .on('addDev', (value) => {
         if (!devs.some(({ _id }) => _id === value._id)) {
           setDevs([...devs, value]);
         }
       })
-      .on('editDev', value => {
-        setDevs(devs.map(dev => (dev._id === value._id ? value : dev)));
+      .on('editDev', (value) => {
+        setDevs(devs.map((dev) => (dev._id === value._id ? value : dev)));
       })
       .on('deleteDev', ({ _id }) => {
         setDevs(devs.filter(({ _id: devId }) => devId !== _id));
@@ -47,7 +47,7 @@ function App() {
 
       <main>
         <ul>
-          {devs.map(dev => (
+          {devs.map((dev) => (
             <DevItem key={dev._id} dev={dev} onEdit={editDevMode} />
           ))}
         </ul>

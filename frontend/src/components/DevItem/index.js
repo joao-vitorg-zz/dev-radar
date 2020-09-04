@@ -17,7 +17,7 @@ export default function DevItem({ dev, onEdit }) {
     const confirm = global.confirm('Deseja mesmo deletar?');
 
     if (confirm) {
-      api.delete(`/devs/${_id}`).catch(reason => {
+      api.delete(`/devs/${_id}`).catch((reason) => {
         alert(reason);
       });
     }
